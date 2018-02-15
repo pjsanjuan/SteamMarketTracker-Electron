@@ -1,12 +1,14 @@
 var path = require('path')
 var webpack = require('webpack')
 
+var config = 
+
 module.exports = {
   entry: './src/main.js',
-  target: 'electron',
+  // target: 'electron',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: 'dist/',
+    publicPath: '/dist/',
     filename: 'build.js'
   },
   module: {
@@ -58,6 +60,7 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV === 'production') {
+  module.exports.output.publicPath = 'dist/'
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([

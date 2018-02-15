@@ -29,3 +29,6 @@ node_modules
 
 # Dist
 dist
+
+#eslint
+.eslintrc.json
