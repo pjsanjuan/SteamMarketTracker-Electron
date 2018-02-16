@@ -1,26 +1,26 @@
-import request from 'request-promise'
-import cheerio from 'cheerio'
+var axios = require('axios')
+var cheerio = require('cheerio')
 
-export function formResponse(steamUrl) {
+export default function getItemObject(steamUrl) {
     return new Promise((resolve, reject) => {
-        var response = {
+        var itemObject = {
             error: null,
             imageUrl: '',
             data: ''
         }
         formJsonUrl(steamUrl)
             .then((jsonUrl) => {
-                return request(jsonUrl)
+                return axios.get(jsonUrl)
             })
-            .then((data) => {
-                response.data = data
+            .then((response) => {
+                itemObject.data = response.data
                 return fetchImage(steamUrl)
             })
             .then((imageUrl) => {
-                response.imageUrl = imageUrl
-                resolve(response)
+                itemObject.imageUrl = imageUrl
+                resolve(itemObject)
             })
-            .catch(() => {
+            .catch((error) => {
                 reject(new Error('Data could not fetched'))
             })
     })
@@ -37,17 +37,17 @@ function formJsonUrl(steamUrl, currency = 1) {
         } else {
             reject(new Error('URL could not be generated'))
         }
-    })
+    });
 }
 
 //return a promise that resolves an image URL
 function fetchImage(steamUrl) {
     return new Promise((resolve, reject) => {
-        request(steamUrl).then((html) => {
-            var $ = cheerio.load(html)
+        axios.get(steamUrl).then((response) => {
+            var $ = cheerio.load(response.data)
             resolve($('div.market_listing_largeimage img').attr('src'))
         }).catch((err) => {
             reject(err)
         })
     })
-}
+};

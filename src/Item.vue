@@ -10,6 +10,7 @@
             </div>
             <div class="col">
                 Pricring Information Goes Here
+                {{displayItem}}
             </div>
       </div>
   </div>
@@ -21,7 +22,10 @@
 
 <script>
 export default {
+  props: {
+    displayItem: Object
+  },
   name: "item"
-};
+}
 </script>
 

@@ -2,12 +2,17 @@
 <div class="text-center">
     This will be the tracker component.
     It's job will be to render the Item's to display.
-    {{items}}
+    <ul class="list-group">
+        <li v-for="elem in items" :key="elem.imageUrl" class="list-group-item">
+            <item v-bind:displayItem="fetchItem(elem)"></item>
+        </li>
+    </ul>
 </div>
 </template>
 
 <script>
 import item from "./Item.vue"
+import getItemObject from "./lib/itemretriever"
 
 export default {
   components: {
@@ -17,6 +22,13 @@ export default {
   computed: {
       items(){
           return this.$store.state.items
+      }
+  },
+  methods: {
+      fetchItem: function(elem){
+          getItemObject(elem).then((itemObject)=>{
+              return itemObject
+          })
       }
   }
 };
