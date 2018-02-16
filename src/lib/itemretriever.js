@@ -1,5 +1,5 @@
-var axios = require('axios')
 var cheerio = require('cheerio')
+var fetch = require('node-fetch')
 
 export default function getItemObject(steamUrl) {
     return new Promise((resolve, reject) => {
@@ -8,13 +8,14 @@ export default function getItemObject(steamUrl) {
             imageUrl: '',
             data: ''
         }
+
         formJsonUrl(steamUrl)
             .then((jsonUrl) => {
-                console.log(jsonUrl)
-                return axios.get(jsonUrl)
+                return fetch(jsonUrl)
             })
-            .then((response) => {
-                itemObject.data = response.data
+            .then(res => res.json())
+            .then((body) => {
+                itemObject.data = body
                 return fetchImage(steamUrl)
             })
             .then((imageUrl) => {
@@ -22,7 +23,7 @@ export default function getItemObject(steamUrl) {
                 resolve(itemObject)
             })
             .catch((error) => {
-                reject(new Error('Data could not fetched'))
+                reject(error)
             })
     })
 }
@@ -44,11 +45,13 @@ function formJsonUrl(steamUrl, currency = 1) {
 //return a promise that resolves an image URL
 function fetchImage(steamUrl) {
     return new Promise((resolve, reject) => {
-        axios.get(steamUrl).then((response) => {
-            var $ = cheerio.load(response.data)
-            resolve($('div.market_listing_largeimage img').attr('src'))
-        }).catch((err) => {
-            reject(err)
-        })
+        fetch(steamUrl)
+            .then(res => res.text())
+            .then((body) => {
+                var $ = cheerio.load(body)
+                resolve($('div.market_listing_largeimage img').attr('src'))
+            }).catch((err) => {
+                reject(err)
+            })
     })
 };

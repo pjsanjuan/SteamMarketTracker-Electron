@@ -12,7 +12,6 @@
 
 <script>
 import item from "./Item.vue";
-// import getItemObject from "./lib/itemretriever";
 
 export default {
   components: {
