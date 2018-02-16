@@ -6,12 +6,23 @@
   <div class="card-body">
       <div class="row">
             <div class="col">
-                Picture Goes Here
+                <img v-bind:src="itemObj.imageUrl" height="200" width="200"/>
             </div>
             <div class="col">
-                Pricring Information Goes Here
-                {{displayItem}}
-                {{itemObj}}
+                <table>
+                    <tr>
+                        <td>Purchase Price</td>
+                        <td>{{displayItem.buyPrice}}</td>
+                    </tr>
+                    <tr>
+                        <td>Lowest Price</td>
+                        <td>{{itemObj.data.lowest_price}}</td>
+                    </tr>
+                    <tr>
+                        <td>Median Price</td>
+                        <td>{{itemObj.data.median_price}}</td>
+                    </tr>
+                </table>    
             </div>
       </div>
   </div>
