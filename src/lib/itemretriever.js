@@ -10,6 +10,7 @@ export default function getItemObject(steamUrl) {
         }
         formJsonUrl(steamUrl)
             .then((jsonUrl) => {
+                console.log(jsonUrl)
                 return axios.get(jsonUrl)
             })
             .then((response) => {

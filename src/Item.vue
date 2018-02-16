@@ -10,7 +10,7 @@
             </div>
             <div class="col">
                 Pricring Information Goes Here
-                {{displayItem}}
+                {{itemObj}}
             </div>
       </div>
   </div>
@@ -21,11 +21,18 @@
 </template>
 
 <script>
+import getItemObject from './lib/itemretriever'
+
 export default {
   props: {
     displayItem: Object
   },
-  name: "item"
+  name: "item",
+  computed: {
+      itemObj: function(){
+          return getItemObject(this.displayItem.url)
+      }
+  }
 }
 </script>
 
