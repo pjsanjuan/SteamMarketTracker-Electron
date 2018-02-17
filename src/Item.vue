@@ -1,8 +1,8 @@
 <template>
   <div class="card text-center">
-  <div class="card-header">
+  <!-- <div class="card-header">
     Item Name
-  </div>
+  </div> -->
   <div class="card-body">
       <div class="row">
             <div class="col">
@@ -26,9 +26,9 @@
             </div>
       </div>
   </div>
-  <div class="card-footer text-muted">
+  <!-- <div class="card-footer text-muted">
     Link on Steam Market
-  </div>
+  </div> -->
 </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
   name: "item",
   asyncComputed: {
     itemObj() {
-      return getItemObject(this.displayItem.url);
+      return getItemObject(this.displayItem.url).then(result => result);
     }
   }
 };

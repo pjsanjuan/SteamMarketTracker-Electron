@@ -1,5 +1,5 @@
-var cheerio = require('cheerio')
-var fetch = require('node-fetch')
+import cheerio from 'cheerio'
+import fetch from 'node-fetch'
 
 export default function getItemObject(steamUrl) {
     return new Promise((resolve, reject) => {

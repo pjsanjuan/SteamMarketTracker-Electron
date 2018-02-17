@@ -1,11 +1,9 @@
 var path = require('path')
 var webpack = require('webpack')
 
-var config = 
-
 module.exports = {
   entry: './src/main.js',
-  // target: 'electron',
+  target: 'electron-renderer',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
@@ -69,12 +67,15 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true,
+    //   compress: {
+    //     warnings: false
+    //   }
+    // }),
+    new webpack.NormalModuleReplacementPlugin(
+        /\/iconv-loader$/, 'node-noop'
+    ),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })

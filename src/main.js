@@ -9,7 +9,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import {store} from './store/store'
 
 
-Vue.use(BootstrapVue);
+Vue.use(BootstrapVue)
 Vue.use(AsyncComputed)
 
 new Vue({

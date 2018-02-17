@@ -13,8 +13,8 @@ function createWindow() {
     win = new BrowserWindow({
         minWidth: sameWidth,
         minHeight: sameHeight,
-        maxWidth: sameWidth,
-        maxHeight: sameHeight
+        // maxWidth: sameWidth,
+        // maxHeight: sameHeight
     })
 
     // and load the index.html of the app.
@@ -25,7 +25,7 @@ function createWindow() {
     }))
 
     // Open the DevTools.
-    // win.webContents.openDevTools()
+    win.webContents.openDevTools()
 
     // Emitted when the window is closed.
     win.on('closed', () => {

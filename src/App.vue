@@ -13,17 +13,19 @@
 </template>
 
 <script>
-import sidebar from './Sidebar.vue'
-import tracker from './Tracker.vue'
+import sidebar from "./Sidebar.vue";
+import tracker from "./Tracker.vue";
+import fse from "fs-extra";
+// import {remote} from "electron"
 
 export default {
   components: {
-    'sidebar': sidebar,
-    'tracker': tracker
+    sidebar: sidebar,
+    tracker: tracker
   },
   name: "app",
-  data() {
-    return {};
+  created: function() {
+    //   console.log(remote.getPath('appData'))
   }
 };
 </script>

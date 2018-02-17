@@ -32,3 +32,5 @@ dist
 
 #eslint
 .eslintrc.json
+
+.vscode

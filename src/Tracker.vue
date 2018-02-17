@@ -18,7 +18,7 @@ export default {
   name: "tracker",
   computed: {
     items() {
-      return this.$store.state.items;
+      return this.$store.getters.getItems;
     }
   }
 };
@@ -29,5 +29,3 @@ export default {
     overflow-y: scroll;
 }
 </style>
-
-
