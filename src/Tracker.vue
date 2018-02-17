@@ -1,6 +1,6 @@
 <template>
 <div class="text-center">
-    <ul class="list-group">
+    <ul class="list-group overflow-scroll">
         <li v-for="elem in items" :key="elem.imageUrl" class="list-group-item">
             <item v-bind:displayItem="elem"></item>
         </li>
@@ -23,4 +23,11 @@ export default {
   }
 };
 </script>
+<style scoped>
+.overflow-scroll{
+    max-height: 500px;
+    overflow-y: scroll;
+}
+</style>
+
 
