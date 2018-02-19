@@ -1,6 +1,10 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
+const fse = require('fs-extra')
+
+const appName = 'SMT'
+const itemJson = path.join(app.getPath('appData'), `${appName}`, 'items.json')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -9,6 +13,13 @@ let sameWidth = 800
 let sameHeight = 600
 
 function createWindow() {
+    //Ensure the JSON file exists for the list of items to track
+    fse.ensureFileSync(itemJson)
+    console.log(fse.statSync(itemJson).blksize)
+    if(!fse.statSync(itemJson).blksize) {
+        fse.writeJSONSync(itemJson, {})
+    }
+
     // Create the browser window.
     win = new BrowserWindow({
         minWidth: sameWidth,

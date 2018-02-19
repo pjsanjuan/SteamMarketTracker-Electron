@@ -16,7 +16,7 @@
 import sidebar from "./Sidebar.vue";
 import tracker from "./Tracker.vue";
 import fse from "fs-extra";
-// import {remote} from "electron"
+const { app } = require("electron").remote;
 
 export default {
   components: {
@@ -25,7 +25,7 @@ export default {
   },
   name: "app",
   created: function() {
-    //   console.log(remote.getPath('appData'))
+    console.log(app.getPath("appData"));
   }
 };
 </script>
