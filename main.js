@@ -1,10 +1,19 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const url = require('url')
 const fse = require('fs-extra')
 
 const appName = 'SMT'
-const itemJson = path.join(app.getPath('appData'), `${appName}`, 'items.json')
+const itemJsonPath = path.join(app.getPath('appData'), `${appName}`, 'items.json')
+
+
+const sampleItems = {
+    items: [
+        { url: 'http://steamcommunity.com/market/listings/730/Clutch%20Case', buyPrice: 10.2 },
+        { url: 'http://steamcommunity.com/market/listings/730/AK-47%20%7C%20Redline%20%28Field-Tested%29', buyPrice: 10.7 },
+        { url: 'http://steamcommunity.com/market/listings/730/AK-47%20%7C%20Frontside%20Misty%20%28Field-Tested%29', buyPrice: 3.50 },
+    ]
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -14,10 +23,10 @@ let sameHeight = 600
 
 function createWindow() {
     //Ensure the JSON file exists for the list of items to track
-    fse.ensureFileSync(itemJson)
-    console.log(fse.statSync(itemJson).blksize)
-    if(!fse.statSync(itemJson).blksize) {
-        fse.writeJSONSync(itemJson, {})
+    fse.ensureFileSync(itemJsonPath)
+    console.log(fse.statSync(itemJsonPath).blksize)
+    if (!fse.statSync(itemJsonPath).blksize) {
+        fse.writeJSONSync(itemJsonPath, sampleItems)
     }
 
     // Create the browser window.
@@ -35,8 +44,15 @@ function createWindow() {
         slashes: true
     }))
 
+    require('vue-devtools').install()
     // Open the DevTools.
     win.webContents.openDevTools()
+
+    ipcMain.on('fetchItemJson-sync', (event) => {
+        fse.readJson(itemJsonPath).then((items) => {
+            event.returnValue = items
+        })
+    })
 
     // Emitted when the window is closed.
     win.on('closed', () => {

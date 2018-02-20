@@ -15,8 +15,7 @@
 <script>
 import sidebar from "./Sidebar.vue";
 import tracker from "./Tracker.vue";
-import fse from "fs-extra";
-const { app } = require("electron").remote;
+var ipcRenderer = require("electron").ipcRenderer;
 
 export default {
   components: {
@@ -25,7 +24,7 @@ export default {
   },
   name: "app",
   created: function() {
-    console.log(app.getPath("appData"));
+    this.$store.commit("setItems", ipcRenderer.sendSync("fetchItemJson-sync"));
   }
 };
 </script>
