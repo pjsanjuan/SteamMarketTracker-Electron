@@ -6,6 +6,15 @@ const fse = require('fs-extra')
 const appName = 'SMT'
 const itemJson = path.join(app.getPath('appData'), `${appName}`, 'items.json')
 
+
+const sampleItems = {
+    items: [
+        { url: 'http://steamcommunity.com/market/listings/730/Clutch%20Case', buyPrice: 10.2 },
+        { url: 'http://steamcommunity.com/market/listings/730/AK-47%20%7C%20Redline%20%28Field-Tested%29', buyPrice: 10.7 },
+        { url: 'http://steamcommunity.com/market/listings/730/AK-47%20%7C%20Frontside%20Misty%20%28Field-Tested%29', buyPrice: 3.50 },
+    ]
+}
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
@@ -17,7 +26,7 @@ function createWindow() {
     fse.ensureFileSync(itemJson)
     console.log(fse.statSync(itemJson).blksize)
     if(!fse.statSync(itemJson).blksize) {
-        fse.writeJSONSync(itemJson, {})
+        fse.writeJSONSync(itemJson, sampleItems)
     }
 
     // Create the browser window.
@@ -35,8 +44,12 @@ function createWindow() {
         slashes: true
     }))
 
+    win.webContents.send('itemJson', itemJson)
+
+    require('vue-devtools').install()
     // Open the DevTools.
     win.webContents.openDevTools()
+    
 
     // Emitted when the window is closed.
     win.on('closed', () => {
