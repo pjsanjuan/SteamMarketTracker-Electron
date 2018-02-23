@@ -5,7 +5,7 @@
         <sidebar></sidebar>
       </div>
       <div class="col-10">
-          <tracker></tracker>
+          <router-view></router-view>
       </div>
 
     </div>
@@ -15,6 +15,7 @@
 <script>
 import sidebar from "./Sidebar.vue";
 import tracker from "./Tracker.vue";
+import addItem from "./AddItem.vue"
 var ipcRenderer = require("electron").ipcRenderer;
 
 export default {
