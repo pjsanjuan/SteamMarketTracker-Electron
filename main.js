@@ -9,9 +9,9 @@ const itemJsonPath = path.join(app.getPath('appData'), `${appName}`, 'items.json
 
 const sampleItems = {
     items: [
-        { url: 'http://steamcommunity.com/market/listings/730/Clutch%20Case', buyPrice: 10.2 },
-        { url: 'http://steamcommunity.com/market/listings/730/AK-47%20%7C%20Redline%20%28Field-Tested%29', buyPrice: 10.7 },
-        { url: 'http://steamcommunity.com/market/listings/730/AK-47%20%7C%20Frontside%20Misty%20%28Field-Tested%29', buyPrice: 3.50 },
+        { url: 'http://steamcommunity.com/market/listings/730/Clutch%20Case', purchasePrice: 10.2 },
+        { url: 'http://steamcommunity.com/market/listings/730/AK-47%20%7C%20Redline%20%28Field-Tested%29', purchasePrice: 10.7 },
+        { url: 'http://steamcommunity.com/market/listings/730/AK-47%20%7C%20Frontside%20Misty%20%28Field-Tested%29', purchasePrice: 3.50 },
     ]
 }
 

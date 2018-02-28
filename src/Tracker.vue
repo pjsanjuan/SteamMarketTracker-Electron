@@ -1,7 +1,7 @@
 <template>
 <div class="text-center">
     <ul class="list-group overflow-scroll">
-        <li v-for="elem in items" :key="elem.imageUrl" class="list-group-item">
+        <li v-for="elem in rawitems" :key="elem.url" class="list-group-item">
             <item v-bind:displayItem="elem"></item>
         </li>
     </ul>
@@ -17,8 +17,8 @@ export default {
   },
   name: "tracker",
   computed: {
-    items() {
-      return this.$store.getters.getItems;
+    rawitems() {
+      return this.$store.getters.getItems; //returns an array of RawItems
     }
   }
 };

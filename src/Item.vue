@@ -6,7 +6,7 @@
   <div class="card-body">
       <div class="row">
             <div class="col">
-                <img v-bind:src="itemObj.imageUrl" height="200" width="200"/>
+                <img v-bind:src="item.imgUrl" height="200" width="200"/>
             </div>
             <div class="col">
                 <table>
@@ -16,11 +16,11 @@
                     </tr>
                     <tr>
                         <td>Lowest Price</td>
-                        <td>{{itemObj.data.lowest_price}}</td>
+                        <td>{{item.steamData.lowest_price}}</td>
                     </tr>
                     <tr>
                         <td>Median Price</td>
-                        <td>{{itemObj.data.median_price}}</td>
+                        <td>{{item.steamData.median_price}}</td>
                     </tr>
                 </table>    
             </div>
@@ -33,16 +33,18 @@
 </template>
 
 <script>
-import getItemObject from "./lib/itemretriever";
+import getItem from "./lib/itemretriever";
+import Item from '../classes/Item'
+import RawItem from '../classes/RawItem'
 
 export default {
   props: {
-    displayItem: Object
+    displayItem: RawItem
   },
   name: "item",
   asyncComputed: {
-    itemObj() {
-      return getItemObject(this.displayItem.url).then(result => result);
+    item() {
+      return getItem(this.displayItem).then(result => result);
     }
   }
 };
