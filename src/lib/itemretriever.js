@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 import Item from '../../classes/Item'
 
 //Resolves with an Item
-export default function getItem(rawItem) {
+export function getItem(rawItem) {
 	return new Promise((resolve, reject) => {
 		var item = new Item()
 
@@ -16,7 +16,7 @@ export default function getItem(rawItem) {
 			.then(res => res.json())
 			.then((body) => {
 				item.steamData = body
-				return fetchImage(rawItem.url)
+				return getImage(rawItem.url)
 			})
 			.then((imageUrl) => {
 				item.imgUrl = imageUrl
@@ -43,7 +43,7 @@ function formJsonUrl(steamUrl, currency = 1) {
 }
 
 //return a promise that resolves an image URL
-function fetchImage(steamUrl) {
+export function getImage(steamUrl) {
 	return new Promise((resolve, reject) => {
 		fetch(steamUrl)
 			.then(res => res.text())

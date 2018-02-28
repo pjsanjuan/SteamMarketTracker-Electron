@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import getItem from "./lib/itemretriever";
+import {getItem} from "./lib/itemretriever";
 import Item from '../classes/Item'
 import RawItem from '../classes/RawItem'
 
