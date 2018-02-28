@@ -57,6 +57,10 @@ module.exports = {
   devtool: '#eval-source-map'
 }
 
+if (process.env.NODE_ENV === 'development'){
+    // module.exports.target = 'web'
+}
+
 if (process.env.NODE_ENV === 'production') {
   module.exports.output.publicPath = 'dist/'
   module.exports.devtool = '#source-map'

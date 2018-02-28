@@ -2,9 +2,9 @@
     <nav class="bg-light sidebar">
         <div class="sidebar-sticky">
             <ul class="nav flex-column">
-                <li class="nav-item"><a class="nav-link" href="#">Tracker</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Calculator</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+                Sidebar
+                <li class="nav-item"><router-link to="/">Tracker</router-link></li>
+                <li class="nav-item"><router-link to="addItem">Add Item</router-link></li>
             </ul>
         </div>
     </nav>
