@@ -1,6 +1,6 @@
-# steamnarkettracker-electron
+# Steam Market Tracker
 
-> A Vue.js project
+> An Electron app to track item prices on the Steam Community market.
 
 ## Build Setup
 
